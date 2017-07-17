@@ -21,7 +21,7 @@ namespace TheWorld
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseDefaultFiles(); // to serve the files and page in entring the localhost and not doing with doing like eg:- http://localhost:0000/index.html
+            //app.UseDefaultFiles(); // to serve the files and page in entring the localhost and not doing with doing like eg:- http://localhost:0000/index.html
 
             app.UseStaticFiles(); //this is the middleWare to serve static files like html,javascript and css
           
