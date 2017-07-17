@@ -25,7 +25,18 @@ namespace TheWorld
             //app.UseDefaultFiles(); // to serve the files and page in entring the localhost and not doing with doing like eg:- http://localhost:0000/index.html
 
             app.UseStaticFiles(); //this is the middleWare to serve static files like html,javascript and css
-            app.UseMvc();
+
+            app.UseMvc(config => config.MapRoute( //routes 
+                name: "Default",
+                template: "{controller}/{action}/{id?}",
+                defaults: new
+                {
+                    controller = "Home",
+                    action = "Index",
+
+                }
+
+                ));
         }
     }
 }

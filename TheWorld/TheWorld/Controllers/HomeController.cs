@@ -2,13 +2,11 @@
 
 namespace TheWorld.Controllers
 {
-    [Route("api/[controller]")]
-    public class AppController : Controller
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-
     }
 }
