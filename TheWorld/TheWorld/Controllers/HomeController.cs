@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TheWorld.Controllers
 {
@@ -11,6 +12,7 @@ namespace TheWorld.Controllers
 
         public IActionResult Contact()
         {
+           
             return View();
 
         }
