@@ -7,12 +7,13 @@
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
 <h1>Contact Page</h1>
-<form>
+<form method="post">
+    <span asp-validation-summary="ModelOnly"></span>
     <label asp-for="Name"></label>
     <input asp-for="Name"/>
     <span asp-validation-for="Name"></span>
     <label asp-for="Email"></label>
-    <input  asp-for="Email" type="email"/>
+    <input asp-for="Email" type="email"/>
     <span asp-validation-for="Email"></span>
     <label asp-for="Message">Message</label>
     <textarea cols="40" rows="4" asp-for="Message"></textarea>
