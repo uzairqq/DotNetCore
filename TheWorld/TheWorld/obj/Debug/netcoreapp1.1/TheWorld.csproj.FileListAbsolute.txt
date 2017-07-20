@@ -6,3 +6,4 @@ E:\DotNetCore\TheWorld\TheWorld\bin\Debug\netcoreapp1.1\TheWorld.pdb
 E:\DotNetCore\TheWorld\TheWorld\obj\Debug\netcoreapp1.1\TheWorld.AssemblyInfo.cs
 E:\DotNetCore\TheWorld\TheWorld\obj\Debug\netcoreapp1.1\TheWorld.dll
 E:\DotNetCore\TheWorld\TheWorld\obj\Debug\netcoreapp1.1\TheWorld.pdb
+E:\DotNetCore\TheWorld\TheWorld\obj\Debug\netcoreapp1.1\TheWorld.csprojResolveAssemblyReference.cache
