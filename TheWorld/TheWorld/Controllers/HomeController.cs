@@ -36,6 +36,11 @@ namespace TheWorld.Controllers
         [HttpPost]
         public IActionResult Contact(ContactViewModel contactViewModel)
         {
+            if (contactViewModel.Email.Contains("gmail.com"))
+            {
+                ModelState.AddModelError("Email", "We donot take gmail accounts");
+            }
+
             if (ModelState.IsValid)
             { 
             _mailServices.SendMail(_configuration["MailSettings:ToAddress"],"Laraib.aiit@hotmail.com","TheWorld","HelloUzairss");
