@@ -7,70 +7,63 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using TheWorld.Services;
 
 namespace TheWorld
 {
-    public class Startup
+  public class Startup
+  {
+    private IHostingEnvironment _env;
+    private IConfigurationRoot _config;
+
+    public Startup(IHostingEnvironment env)
     {
-        private readonly IHostingEnvironment _environment;
-        private readonly IConfigurationRoot _configuration;
+      _env = env;
 
-        public Startup(IHostingEnvironment environment)
-        {
-            _environment = environment;
+      var builder = new ConfigurationBuilder()
+        .SetBasePath(_env.ContentRootPath)
+        .AddJsonFile("config.json")
+        .AddEnvironmentVariables();
 
-
-            var builder = new ConfigurationBuilder() //to take data from the json file of mail 
-                .AddJsonFile("config.json") //to take data from the json file called config.json
-
-                .SetBasePath(_environment.ContentRootPath) //to take config.json from root path of the project
-                .AddEnvironmentVariables();
-                _configuration = builder.Build();
-        }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
-            services.AddSingleton(_configuration);
-            if (_environment.IsEnvironment("Development"))
-            {
-                services.AddScoped<IMailServices, DebugMailServices>();
-            }
-            else
-            {
-                //make a real Mail Service
-            }
-            
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app,IHostingEnvironment env)
-        {
-
-            if (env.IsEnvironment("Development"))
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            
-            //app.UseDefaultFiles(); // to serve the files and page in entring the localhost and not doing with doing like eg:- http://localhost:0000/index.html
-
-            app.UseStaticFiles(); //this is the middleWare to serve static files like html,javascript and css
-
-            app.UseMvc(config => config.MapRoute( //routes 
-                name: "Default",
-                template: "{controller}/{action}/{id?}",
-                defaults: new
-                {
-                    controller = "Home",
-                    action = "Index",
-
-                }
-
-                ));
-        }
+      _config = builder.Build();
     }
+
+    // This method gets called by the runtime. Use this method to add services to the container.
+    // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
+    public void ConfigureServices(IServiceCollection services)
+    {
+      services.AddSingleton(_config);
+
+      if (_env.IsEnvironment("Development") || _env.IsEnvironment("Testing"))
+      {
+        services.AddScoped<IMailService, DebugMailService>();
+      }
+      else
+      {
+        // Implement a real Mail Service
+      }
+
+      services.AddMvc();
+    }
+
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+      if (env.IsEnvironment("Development"))
+      {
+        app.UseDeveloperExceptionPage();
+      }
+
+      app.UseStaticFiles();
+
+      app.UseMvc(config =>
+      {
+        config.MapRoute(
+          name: "Default",
+          template: "{controller}/{action}/{id?}",
+          defaults: new { controller = "App", action = "Index" }
+          );
+      });
+    }
+  }
 }
