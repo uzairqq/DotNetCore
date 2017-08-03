@@ -38,13 +38,16 @@ namespace TheWorld.Controllers
         {
             if (contactViewModel.Email.Contains("gmail.com"))
             {
-                ModelState.AddModelError("Email", "We donot take gmail accounts");
+                ModelState.AddModelError("", "We donot take gmail accounts");
             }
 
             if (ModelState.IsValid)
             { 
             _mailServices.SendMail(_configuration["MailSettings:ToAddress"],"Laraib.aiit@hotmail.com","TheWorld","HelloUzairss");
+
+                ViewBag.UserMessage = "Message Sent";
             }
+
             return View();
         }
 
