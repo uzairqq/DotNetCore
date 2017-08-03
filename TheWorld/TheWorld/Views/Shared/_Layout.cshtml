@@ -5,8 +5,9 @@
   <title>The World - @ViewBag.Title</title>
   <meta charset="utf-8" />
 
-  <link rel="stylesheet" href="~/css/site.css" />
-
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css"/>
 </head>
 
 <body>
@@ -24,7 +25,9 @@
   <div id="wrapper">
     <div id="main">
       <div>
-        <button id="menuToggle">Toggle Menu</button>
+          <button id="menuToggle" class="btn btn-primary">
+              <i class="fa fa-angle-left"></i>
+          </button>
       </div>
       @RenderBody()
     </div>
@@ -34,7 +37,7 @@
   </div>
   <script src="~/lib/jquery/dist/jquery.min.js"></script>
   @RenderSection("scripts", false)
-
+  <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="~/js/site.js"></script>
 </body>
 
