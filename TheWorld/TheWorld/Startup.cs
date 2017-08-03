@@ -27,7 +27,7 @@ namespace TheWorld
 
                 .SetBasePath(_environment.ContentRootPath) //to take config.json from root path of the project
                 .AddEnvironmentVariables();
-            _configuration = builder.Build();
+                _configuration = builder.Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
