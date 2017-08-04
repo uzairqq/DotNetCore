@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TheWorld.Models;
 using TheWorld.Services;
 
 namespace TheWorld
@@ -32,6 +33,9 @@ namespace TheWorld
     // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
+
+        services.AddDbContext<WorldContext>();
+
       services.AddSingleton(_config);
 
       if (_env.IsEnvironment("Development") || _env.IsEnvironment("Testing"))
