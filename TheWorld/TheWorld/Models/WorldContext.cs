@@ -6,7 +6,6 @@ namespace TheWorld.Models
     {
         public WorldContext()
         {
-            
         }
 
         public DbSet<Trip> Trips { get; set; }
