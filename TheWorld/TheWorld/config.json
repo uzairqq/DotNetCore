@@ -1,5 +1,8 @@
 {
   "MailSettings": {
     "ToAddress": "shawn@wildermuth.com"
+  },
+  "ConnectionStrings": {
+    "WorldDbContext": "Server=(localdb)\\MSSQLLocalDB;Database=TheWorldDb;Trusted_Connection=True;MultipleActiveResultSets=True;" 
   }
 }

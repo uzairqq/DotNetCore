@@ -34,7 +34,7 @@ namespace TheWorld
     public void ConfigureServices(IServiceCollection services)
     {
 
-        services.AddDbContext<WorldContext>();
+      services.AddDbContext<WorldContext>();
 
       services.AddSingleton(_config);
 

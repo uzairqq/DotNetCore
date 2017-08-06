@@ -21,7 +21,7 @@ namespace TheWorld.Controllers.Web
     {
       _mailService = mailService;
       _config = config;
-        _context = context;
+      _context = context;
     }
 
     public IActionResult Index()
