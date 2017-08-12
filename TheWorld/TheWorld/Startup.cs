@@ -38,6 +38,8 @@ namespace TheWorld
 
       services.AddSingleton(_config);
 
+      services.AddTransient<WorldContextSeedData>();//every time transient gonna create data...worldseeddata is data class. 
+
       if (_env.IsEnvironment("Development") || _env.IsEnvironment("Testing"))
       {
         services.AddScoped<IMailService, DebugMailService>();
@@ -51,7 +53,7 @@ namespace TheWorld
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env,WorldContextSeedData seeder)
     {
       if (env.IsEnvironment("Development"))
       {
@@ -68,6 +70,8 @@ namespace TheWorld
           defaults: new { controller = "App", action = "Index" }
           );
       });
+
+        seeder.EnsureSeedData().Wait();
     }
   }
 }
