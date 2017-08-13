@@ -40,6 +40,8 @@ namespace TheWorld
 
       services.AddTransient<WorldContextSeedData>();//every time transient gonna create data...worldseeddata is data class. 
 
+      services.AddScoped<IWorldRepository, WorldRepository>();
+
       if (_env.IsEnvironment("Development") || _env.IsEnvironment("Testing"))
       {
         services.AddScoped<IMailService, DebugMailService>();
