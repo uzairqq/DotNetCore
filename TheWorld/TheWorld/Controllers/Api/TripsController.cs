@@ -10,10 +10,17 @@ namespace TheWorld.Controllers.Api
 {
     public class TripsController:Controller
     {
+        private readonly IWorldRepository _worldRepository;
+
+        public TripsController(IWorldRepository worldRepository)
+        {
+            _worldRepository = worldRepository;
+        }
+
         [HttpGet("api/trips")]
         public IActionResult Get()
         {
-            return Ok(new Trip() {Name = "UzairTrip",CreatedOn = DateTime.Now,Id = 777,UserName = "what the F..."});
+            return Ok(_worldRepository.GetAllTrips());
         }
     }
 }
