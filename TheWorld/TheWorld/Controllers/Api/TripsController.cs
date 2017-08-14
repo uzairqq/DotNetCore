@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Logging;
 using TheWorld.Models;
 
 namespace TheWorld.Controllers.Api
@@ -14,10 +15,12 @@ namespace TheWorld.Controllers.Api
     public class TripsController:Controller
     {
         private readonly IWorldRepository _worldRepository;
+        private readonly ILogger<TripsController> _logger;
 
-        public TripsController(IWorldRepository worldRepository)
+        public TripsController(IWorldRepository worldRepository,ILogger<TripsController> logger )
         {
             _worldRepository = worldRepository;
+            _logger = logger;
         }
 
         [HttpGet]        //[HttpGet("/foo")]
@@ -31,7 +34,7 @@ namespace TheWorld.Controllers.Api
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                _logger.LogError($"Error in Get Call in Trips Controller:{e.Message}");
                 return BadRequest("Error Occured");
                 
             }
