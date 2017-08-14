@@ -23,7 +23,19 @@ namespace TheWorld.Controllers.Api
         [HttpGet]        //[HttpGet("/foo")]
         public IActionResult Get()
         {
-            return Ok(_worldRepository.GetAllTrips());
+            try
+            {
+                var results = _worldRepository.GetAllTrips();
+
+                return Ok(Mapper.Map<IEnumerable<TripViewModel>>(results));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return BadRequest("Error Occured");
+                
+            }
+            
         }
 
         [HttpPost]
