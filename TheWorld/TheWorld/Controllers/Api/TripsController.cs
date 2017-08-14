@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage;
 using TheWorld.Models;
 
 namespace TheWorld.Controllers.Api
@@ -29,7 +31,10 @@ namespace TheWorld.Controllers.Api
         {
             if (ModelState.IsValid)
             {
-                return Created($"api/trips:{thetrips.Name}",thetrips);
+                var newTrip = Mapper.Map<Trip>(thetrips);
+                
+
+                return Created($"api/trips:{thetrips.Name}",newTrip);
             }
             return BadRequest(ModelState);
         }

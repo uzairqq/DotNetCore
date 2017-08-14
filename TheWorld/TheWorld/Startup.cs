@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -67,6 +68,11 @@ namespace TheWorld
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env,WorldContextSeedData seeder,ILoggerFactory factory)
     {
+       Mapper.Initialize(config =>
+       {
+           config.CreateMap<TripViewModel, Trip>();//used for automapper for data mapper
+       });
+
       if (env.IsEnvironment("Development"))
       {
         app.UseDeveloperExceptionPage();

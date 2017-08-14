@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "49d4bf027b98648708cb09bad386cd72c54c59e4"
+    "signature": "5029d6e6d6ace2fd29d8770219d9ff3d48680838"
   },
   "compilationOptions": {
     "defines": [
@@ -23,6 +23,7 @@
     ".NETCoreApp,Version=v1.1": {
       "theworld/1.0.0": {
         "dependencies": {
+          "AutoMapper": "5.1.1",
           "Microsoft.AspNetCore.Diagnostics": "1.1.2",
           "Microsoft.AspNetCore.Mvc": "1.1.2",
           "Microsoft.AspNetCore.Mvc.TagHelpers": "1.1.2",
@@ -41,6 +42,22 @@
         },
         "compile": {
           "TheWorld.dll": {}
+        }
+      },
+      "automapper/5.1.1": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.3.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Collections.Specialized": "4.3.0",
+          "System.ComponentModel.TypeConverter": "4.3.0",
+          "System.Dynamic.Runtime": "4.3.0",
+          "System.Linq.Queryable": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/AutoMapper.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.3/AutoMapper.dll": {}
         }
       },
       "microsoft.aspnetcore.antiforgery/1.1.1": {
@@ -1193,6 +1210,9 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Collections.Specialized.dll": {}
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Collections.Specialized.dll": {}
         }
       },
       "system.componentmodel.primitives/4.3.0": {
@@ -3112,6 +3132,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "automapper/5.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Q3uFSWccBUE1Q9BW88C6RO2Y/iFkPztTKK1ciyx1jhWPdOi5+pvzZ2EwcJKPiV0cr2EXZUWqQOsSpA5jVjfQBg==",
+      "path": "automapper/5.1.1",
+      "hashPath": "automapper.5.1.1.nupkg.sha512"
     },
     "microsoft.aspnetcore.antiforgery/1.1.1": {
       "type": "package",
