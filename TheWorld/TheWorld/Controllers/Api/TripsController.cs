@@ -18,16 +18,20 @@ namespace TheWorld.Controllers.Api
             _worldRepository = worldRepository;
         }
 
-        [HttpGet]
+        [HttpGet]        //[HttpGet("/foo")]
         public IActionResult Get()
         {
             return Ok(_worldRepository.GetAllTrips());
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Trip thetrips)
+        public IActionResult Post([FromBody] TripViewModel thetrips)
         {
-            return Ok(true);
+            if (ModelState.IsValid)
+            {
+                return Created($"api/trips:{thetrips.Name}",thetrips);
+            }
+            return BadRequest(ModelState);
         }
     }
 }
