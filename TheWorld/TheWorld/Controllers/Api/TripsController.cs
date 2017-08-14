@@ -11,9 +11,9 @@ namespace TheWorld.Controllers.Api
     public class TripsController:Controller
     {
         [HttpGet("api/trips")]
-        public JsonResult Get()
+        public IActionResult Get()
         {
-            return Json(new Trip() {Name = "UzairTrip",CreatedOn = DateTime.Now,Id = 777,UserName = "what the F..."});
+            return Ok(new Trip() {Name = "UzairTrip",CreatedOn = DateTime.Now,Id = 777,UserName = "what the F..."});
         }
     }
 }
