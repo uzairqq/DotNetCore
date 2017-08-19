@@ -24,5 +24,23 @@ namespace TheWorld.Models
             _logger.LogInformation("Getting All Information From The Database");
             return _context.Trips.ToList();
         }
+
+        public void AddTrips(Trip trip)
+        {
+            try
+            {
+                _context.Add(trip);  
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync()) > 0;
+        }
     }
 }

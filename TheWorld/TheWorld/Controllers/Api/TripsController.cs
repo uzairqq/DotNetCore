@@ -47,11 +47,14 @@ namespace TheWorld.Controllers.Api
             if (ModelState.IsValid)
             {
                 var newTrip = Mapper.Map<Trip>(thetrips);
+                _worldRepository.AddTrips(newTrip);
                 
 
                 return Created($"api/trips:{thetrips.Name}",newTrip);
             }
             return BadRequest(ModelState);
         }
+
+        
     }
 }
