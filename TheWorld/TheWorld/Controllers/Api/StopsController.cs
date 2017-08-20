@@ -11,7 +11,7 @@ using TheWorld.Models;
 
 namespace TheWorld.Controllers.Api
 {
-    
+    [Route("api/trip/{tripsName}/stops")]
     public class StopsController:Controller
     {
         private readonly IWorldRepository _repository;
@@ -23,7 +23,7 @@ namespace TheWorld.Controllers.Api
             _logger = logger;
         }
 
-        [HttpGet("api/trip/{tripsName}/stops")]
+        [HttpGet("")]
         public IActionResult Get(string tripsName)
         {
             try
@@ -36,6 +36,33 @@ namespace TheWorld.Controllers.Api
                 _logger.LogError("Failed To Get Stops:{0}",ex);
             }
             return BadRequest("Failed To Return Stops");
+        }
+
+        [HttpPost("")]
+        public async Task<IActionResult> Get(string tripsName,[FromBody] StopsViewModel stopsViewModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest("Model Not Valid In post");
+
+                var newStop=Mapper.Map<Stop>(stopsViewModel);
+
+                _repository.AddStops(tripsName, newStop);
+
+                if (await _repository.SaveChangesAsync())
+                {
+
+                    return Created($"api/trips/{tripsName}/stops/{newStop.Name}",
+                        Mapper.Map<StopsViewModel>(newStop));
+                }
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Failed to Save Stop:{0}",e);
+                
+            }
+            return BadRequest("Failed To save New Stop");
         }
 
     }
