@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace TheWorld.Models
@@ -41,6 +42,23 @@ namespace TheWorld.Models
         public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync()) > 0;
+        }
+
+        public Trip GetTripByName(string tripName)
+        {
+            try
+            {
+                return 
+                _context.Trips
+                .Include(i=>i.Stops)
+                .Where(i => i.Name == tripName)
+                .FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

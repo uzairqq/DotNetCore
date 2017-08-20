@@ -71,6 +71,7 @@ namespace TheWorld
        Mapper.Initialize(config =>
        {
            config.CreateMap<TripViewModel, Trip>().ReverseMap();//used for automapper for data mapper and reverse map is to from entity to view model ,two ways data traveling
+           config.CreateMap<StopsViewModel, Stop>().ReverseMap();
        });
 
       if (env.IsEnvironment("Development"))

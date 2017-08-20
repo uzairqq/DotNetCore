@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using TheWorld.Controllers.Api;
 
 namespace TheWorld.Models
 {
@@ -10,5 +11,6 @@ namespace TheWorld.Models
         void AddTrips(Trip trip);
 
         Task<bool> SaveChangesAsync();
+        Trip GetTripByName(string tripName);
     }
 }
