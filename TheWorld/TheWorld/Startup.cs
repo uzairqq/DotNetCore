@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -47,7 +48,16 @@ namespace TheWorld
 
       services.AddScoped<IWorldRepository, WorldRepository>();
 
+        services.AddIdentity<WorldUser, IdentityRole>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+                config.Password.RequiredLength = 8;
+                config.Cookies.ApplicationCookie.LoginPath = "/Auth/Login";
+
+            })
+            .AddEntityFrameworkStores<WorldContext>();
         services.AddLogging();
+            
 
             if (_env.IsEnvironment("Development") || _env.IsEnvironment("Testing"))
       {
@@ -76,6 +86,10 @@ namespace TheWorld
            config.CreateMap<StopsViewModel, Stop>().ReverseMap();
        });
 
+        app.UseStaticFiles();
+
+        app.UseIdentity();
+
       if (env.IsEnvironment("Development"))
       {
         app.UseDeveloperExceptionPage();
@@ -86,7 +100,7 @@ namespace TheWorld
           factory.AddDebug(LogLevel.Error);
       }
 
-      app.UseStaticFiles();
+      
 
       app.UseMvc(config =>
       {
