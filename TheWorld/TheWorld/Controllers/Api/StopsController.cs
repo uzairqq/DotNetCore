@@ -8,6 +8,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TheWorld.Models;
+using TheWorld.Services;
 
 namespace TheWorld.Controllers.Api
 {
@@ -16,11 +17,13 @@ namespace TheWorld.Controllers.Api
     {
         private readonly IWorldRepository _repository;
         private readonly ILogger<StopsController> _logger;
+        private readonly GeoCoordsService _coordsService;
 
-        public StopsController(IWorldRepository repository,ILogger<StopsController> logger)
+        public StopsController(IWorldRepository repository,ILogger<StopsController> logger,GeoCoordsService coordsService)
         {
             _repository = repository;
             _logger = logger;
+            _coordsService = coordsService;
         }
 
         [HttpGet("")]
@@ -47,13 +50,24 @@ namespace TheWorld.Controllers.Api
 
                 var newStop=Mapper.Map<Stop>(stopsViewModel);
 
-                _repository.AddStops(tripsName, newStop);
-
-                if (await _repository.SaveChangesAsync())
+                var result = await _coordsService.GetCoordsAsync(newStop.Name);
+                if (!result.Success)
                 {
+                    _logger.LogError(result.Message);
+                }
+                else
+                {
+                    newStop.Latitude = result.Latitude;
+                    newStop.Longitude = result.Longitude;
 
-                    return Created($"api/trips/{tripsName}/stops/{newStop.Name}",
-                        Mapper.Map<StopsViewModel>(newStop));
+                    _repository.AddStops(tripsName, newStop);
+
+                    if (await _repository.SaveChangesAsync())
+                    {
+
+                        return Created($"api/trips/{tripsName}/stops/{newStop.Name}",
+                            Mapper.Map<StopsViewModel>(newStop));
+                    }
                 }
 
             }
