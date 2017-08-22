@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -30,22 +31,26 @@ namespace TheWorld.Controllers.Web
 
     public IActionResult Index()
     {
-        try
-        {
-            var data = _repository.GetAllTrips();
-            return View(data);
-            }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-                _logger.LogError($"Failed To Get Trips in Index Page:{e.Message}");
-            return Redirect("/Error");
-            
-        }
-        
+        return View();
     }
+        [Authorize]//for using of identiy for this action
+      public IActionResult Trips()
+      {
+          try
+          {
+              var trips = _repository.GetAllTrips();
+              return View(trips);
+          }
+          catch (Exception e)
+          {
+              Console.WriteLine(e);
+              _logger.LogError($"Failed To Get Trips in Index Page:{e.Message}");
+              return Redirect("/Error");
 
-    public IActionResult Contact()
+          }
+      }
+
+        public IActionResult Contact()
     {
       return View();
     }
