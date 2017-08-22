@@ -51,9 +51,9 @@ namespace TheWorld.Controllers.Web
       }
 
         public IActionResult Contact()
-    {
-      return View();
-    }
+        {
+          return View();
+        }
 
     [HttpPost]
     public IActionResult Contact(ContactViewModel model)
