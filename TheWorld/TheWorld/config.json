@@ -3,6 +3,9 @@
     "ToAddress": "shawn@wildermuth.com"
   },
   "ConnectionStrings": {
-    "WorldDbContext": "Server=(localdb)\\MSSQLLocalDB;Database=TheWorldDb;Trusted_Connection=True;MultipleActiveResultSets=True;" 
-  }
+    "WorldDbContext": "Server=(localdb)\\MSSQLLocalDB;Database=TheWorldDb;Trusted_Connection=True;MultipleActiveResultSets=True;"
+  },
+  "Keys": {
+   "BingKeys": "DONTEVERPUTKEYSINSOURCECONTROL"  
+  } 
 }

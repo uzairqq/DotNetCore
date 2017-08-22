@@ -43,6 +43,7 @@ namespace TheWorld
 
       services.AddTransient<WorldContextSeedData>();//every time transient gonna create data...worldseeddata is data class. 
 
+        services.AddTransient<GeoCoordsService>();
       services.AddScoped<IWorldRepository, WorldRepository>();
 
         services.AddLogging();
