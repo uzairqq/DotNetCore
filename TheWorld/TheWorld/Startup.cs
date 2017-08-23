@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -70,7 +71,13 @@ namespace TheWorld
       }
 
             //services.AddMvc(); //just for using mvc 
-            services.AddMvc()
+            services.AddMvc(config =>
+                {
+                    if (_env.IsProduction()) { 
+                    config.Filters.Add(new RequireHttpsAttribute());// for overall post to hide credentials in production mode
+                    }
+
+                })
                 .AddJsonOptions(confiq =>
                 {
                     confiq.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver(); //for showing json in camel case for api 

@@ -27,7 +27,7 @@ namespace TheWorld.Models
                     UserName = "Uzair",
                     Email = "Uzair.qq@outlook.com"
                 };
-                await _userManager.CreateAsync(user, "P@SSWORD");
+                await _userManager.CreateAsync(user,"abc");
             }
 
             if (!_context.Trips.Any())
