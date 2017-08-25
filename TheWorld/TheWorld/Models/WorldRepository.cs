@@ -70,5 +70,13 @@ namespace TheWorld.Models
                 throw;
             }
         }
+
+        public IEnumerable<Trip> GetTripsByUserName(string name)
+        {
+            return _context.Trips
+                .Include(i=>i.Stops)
+                .Where(i => i.UserName == name)
+                .ToList();
+        }
     }
 }
