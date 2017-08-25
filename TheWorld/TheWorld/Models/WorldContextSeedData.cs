@@ -24,10 +24,10 @@ namespace TheWorld.Models
             {
                var user= new WorldUser
                 {
-                    UserName = "Uzair",
-                    Email = "Uzair.qq@outlook.com"
-                };
-                await _userManager.CreateAsync(user,"abc");
+                    UserName = "samhastings",
+                    Email = "sam.hastings@theworld.com"
+               };
+                await _userManager.CreateAsync(user, "P@ssw0rd!");
             }
 
             if (!_context.Trips.Any())
